@@ -10,6 +10,7 @@ import { ProductItemDetailComponent } from './components/product-item-detail/pro
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { CartComponent } from './components/cart/cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

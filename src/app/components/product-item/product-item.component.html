@@ -1,1 +1,9 @@
-<p>product-item works!</p>
+<div class="product-container">
+  <img src="{{ product.url }}" class="product-image" alt="{{ product.name}}">
+  <p>{{ product.name }}</p>
+  <p>${{ product.price }}</p>
+  <select class="select-input">
+    <option *ngFor="let i of range(10)">{{i}}</option>
+  </select>
+  <button type="button" class="btn btn-primary">Add to cart</button>
+</div>
