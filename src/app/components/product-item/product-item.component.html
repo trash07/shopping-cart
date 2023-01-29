@@ -1,5 +1,7 @@
 <div class="product-container">
-  <img src="{{ product.url }}" class="product-image" alt="{{ product.name}}">
+  <img src="{{ product.url }}"
+       routerLink="/product-details/{{product.id}}"
+       class="product-image" alt="{{ product.name}}">
   <p>{{ product.name }}</p>
   <p>${{ product.price }}</p>
   <select class="select-input">
