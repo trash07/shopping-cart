@@ -7,9 +7,22 @@ import {Product} from "../types/product";
 })
 export class CartService {
   orderedProducts: OrderedProduct[] = []
+  order: {fullName: string, address: string, cardNumber: number} = {
+    fullName: '', address: '', cardNumber: 0
+  }
+
   constructor() { }
 
   addProduct(product: Product, quantity: number): void {
     this.orderedProducts.push({product, quantity})
+  }
+
+  getSelectedProducts(): OrderedProduct[] {
+    return this.orderedProducts
+  }
+
+  getTotalPrice() {
+    return this.orderedProducts.map((op: OrderedProduct) => op.product.price * op.quantity)
+      .reduce((acc: number, cur: number) => acc + cur)
   }
 }

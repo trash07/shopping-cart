@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CartService} from "../../services/cart.service";
 
 @Component({
   selector: 'app-confirmation',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./confirmation.component.css']
 })
 export class ConfirmationComponent {
-
+  constructor(public cartService: CartService) {}
 }
