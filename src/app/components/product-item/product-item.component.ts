@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from "../../types/product";
+import {OrderedProduct} from "../../types/ordered-product";
 
 @Component({
   selector: 'app-product-item',
@@ -10,13 +11,16 @@ export class ProductItemComponent {
   @Input()
   product!: Product;
 
+  @Output()
+  addToCartEvent: EventEmitter<OrderedProduct> = new EventEmitter<OrderedProduct>()
+
   constructor() {}
 
-  range(limit: number): Array<number> {
-    let result = []
-    for(let index = 1; index <= limit; index++) {
-      result.push(index)
-    }
-    return result
+  range(max: number): Array<number> {
+    return [...Array(max).keys()].map(i => i + 1)
+  }
+
+  addProductToCart(quantity: string): void {
+    this.addToCartEvent.emit({product: this.product, quantity: quantity as unknown as number})
   }
 }

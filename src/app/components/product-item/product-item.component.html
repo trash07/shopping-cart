@@ -4,8 +4,8 @@
        class="product-image" alt="{{ product.name}}">
   <p>{{ product.name }}</p>
   <p>${{ product.price }}</p>
-  <select class="select-input">
+  <select class="select-input" #quantitySelect>
     <option *ngFor="let i of range(10)">{{i}}</option>
   </select>
-  <button type="button" class="btn btn-primary">Add to cart</button>
+  <button type="button" class="btn btn-primary" (click)="addProductToCart(quantitySelect.value)">Add to cart</button>
 </div>

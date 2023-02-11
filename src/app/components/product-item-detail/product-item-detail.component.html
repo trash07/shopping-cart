@@ -1,1 +1,15 @@
-<p>product-item-detail works!</p>
+<div class="detail-container" *ngIf="product">
+  <img [src]="product.url" [alt]="product.name">
+  <div class="detail-item">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
+
+    <select class="select-input" #quantitySelect>
+      <option *ngFor="let i of range(10)">{{i}}</option>
+    </select>
+    <br><br>
+    <button type="button" class="btn btn-primary" (click)="addToCart(quantitySelect.value)">Add to cart</button>
+    <br><br>
+    <a class="back-link" routerLink="/">Back to product list</a>
+  </div>
+</div>
