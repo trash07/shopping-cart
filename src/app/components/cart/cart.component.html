@@ -7,7 +7,7 @@
       <div class="cart-item-details">
         <h4>{{ selectedProduct.product.name }}</h4>
         <p>$ {{ selectedProduct.product.price }}</p>
-        <input type="number" [value]="selectedProduct.quantity" class="number-input">
+        <input type="number" [ngModel]="selectedProduct.quantity" min="0" class="number-input" (ngModelChange)="handleQuantityChange($event, selectedProduct)">
       </div>
     </div>
     <strong>Total: $ {{ getTotalPrice() }}</strong>

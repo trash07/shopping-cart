@@ -21,6 +21,18 @@ export class CartService {
     return this.orderedProducts
   }
 
+  removeProduct(product: Product): void {
+    this.orderedProducts = this.orderedProducts.filter((op: OrderedProduct) => op.product.id !== product.id)
+  }
+
+  changeProductQuantity(product: Product, quantity: number): void {
+    for (let i = 0; i < this.orderedProducts.length; i++) {
+      if (this.orderedProducts[i].product.id == product.id) {
+        this.orderedProducts[i].quantity = quantity
+      }
+    }
+  }
+
   getTotalPrice() {
     return this.orderedProducts.map((op: OrderedProduct) => op.product.price * op.quantity)
       .reduce((acc: number, cur: number) => acc + cur)

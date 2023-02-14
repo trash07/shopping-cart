@@ -36,4 +36,11 @@ export class CartComponent implements OnInit {
       this.router.navigate(['/confirmation'])
     }
   }
+
+  handleQuantityChange(newQuantity: string, selectedProduct: OrderedProduct) {
+    const quantity = newQuantity as unknown as number
+    if (quantity < 0) this.cartService.changeProductQuantity(selectedProduct.product, 1)
+    if (quantity === 0) this.cartService.removeProduct(selectedProduct.product)
+    this.cartService.changeProductQuantity(selectedProduct.product, quantity)
+  }
 }
