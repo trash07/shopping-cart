@@ -3,6 +3,7 @@ import {CartService} from "../../services/cart.service";
 import {OrderedProduct} from "../../types/ordered-product";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +13,8 @@ import {Router} from "@angular/router";
 export class CartComponent implements OnInit {
   buyerForm!: FormGroup
 
-  constructor(private cartService: CartService, private router: Router, private formBuilder: FormBuilder) {}
+  constructor(private cartService: CartService, private router: Router, private formBuilder: FormBuilder,
+              private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.buyerForm = this.formBuilder.group({
@@ -40,7 +42,10 @@ export class CartComponent implements OnInit {
   handleQuantityChange(newQuantity: string, selectedProduct: OrderedProduct) {
     const quantity = newQuantity as unknown as number
     if (quantity < 0) this.cartService.changeProductQuantity(selectedProduct.product, 1)
-    if (quantity === 0) this.cartService.removeProduct(selectedProduct.product)
+    if (quantity === 0)  {
+      this.cartService.removeProduct(selectedProduct.product)
+      this.messageService.add({severity: 'warn', summary: 'Item removed!', detail: 'Item successfully removed from cart!'})
+    }
     this.cartService.changeProductQuantity(selectedProduct.product, quantity)
   }
 }

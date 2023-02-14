@@ -3,6 +3,7 @@ import {ProductService} from "../../services/product.service";
 import {Product} from "../../types/product";
 import {CartService} from "../../services/cart.service";
 import {OrderedProduct} from "../../types/ordered-product";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-product-list',
@@ -11,7 +12,7 @@ import {OrderedProduct} from "../../types/ordered-product";
 })
 export class ProductListComponent implements OnInit{
   products: Product[] = []
-  constructor(private productService: ProductService, private cartService: CartService) {}
+  constructor(private productService: ProductService, private cartService: CartService, private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.productService.getProducts()
@@ -20,6 +21,6 @@ export class ProductListComponent implements OnInit{
 
   addToCart(selectedProduct: OrderedProduct): void {
     this.cartService.addProduct(selectedProduct.product, selectedProduct.quantity as unknown as number)
-    alert('Added to cart!')
+    this.messageService.add({severity: 'success', summary: 'Item added !', detail: 'Item successfully added to cart!'})
   }
 }

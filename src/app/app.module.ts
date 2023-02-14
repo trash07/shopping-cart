@@ -12,6 +12,9 @@ import { CartComponent } from './components/cart/cart.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ToastModule} from "primeng/toast";
+import {MessageService} from "primeng/api";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -25,13 +28,17 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         NgbModule,
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
+        ToastModule,
     ],
-  providers: [],
+  providers: [
+    MessageService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

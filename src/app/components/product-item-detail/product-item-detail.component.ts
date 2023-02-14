@@ -3,6 +3,7 @@ import {Product} from "../../types/product";
 import {ProductService} from "../../services/product.service";
 import {CartService} from "../../services/cart.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-product-item-detail',
@@ -13,7 +14,7 @@ export class ProductItemDetailComponent implements  OnInit {
   product!: Product
 
   constructor(private productService: ProductService, private cartService: CartService,
-              private activatedRoute: ActivatedRoute, private router: Router) {}
+              private activatedRoute: ActivatedRoute, private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( async ({id}) => {
@@ -27,6 +28,6 @@ export class ProductItemDetailComponent implements  OnInit {
 
   addToCart(quantity: string) {
     this.cartService.addProduct(this.product, parseInt(quantity))
-    alert(`Added to cart!`)
+    this.messageService.add({severity: 'success', summary: 'Item added !', detail: 'Item successfully added to cart!'})
   }
 }
