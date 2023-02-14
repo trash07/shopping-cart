@@ -21,6 +21,6 @@ export class ProductItemComponent {
   }
 
   addProductToCart(quantity: string): void {
-    this.addToCartEvent.emit({product: this.product, quantity: quantity as unknown as number})
+    this.addToCartEvent.emit({product: this.product, quantity: parseInt(quantity)})
   }
 }

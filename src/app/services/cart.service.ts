@@ -14,6 +14,12 @@ export class CartService {
   constructor() { }
 
   addProduct(product: Product, quantity: number): void {
+    debugger
+    const oldProductInCart = this.orderedProducts.find((op: OrderedProduct) => op.product.id === product.id)
+    if (oldProductInCart) {
+      oldProductInCart.quantity += quantity
+      return
+    }
     this.orderedProducts.push({product, quantity})
   }
 

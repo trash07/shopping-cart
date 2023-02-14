@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit{
   }
 
   addToCart(selectedProduct: OrderedProduct): void {
-    this.cartService.addProduct(selectedProduct.product, selectedProduct.quantity)
+    this.cartService.addProduct(selectedProduct.product, selectedProduct.quantity as unknown as number)
     alert('Added to cart!')
   }
 }

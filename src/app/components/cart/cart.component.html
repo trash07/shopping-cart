@@ -14,6 +14,7 @@
   </div>
 
 
+  <!-- Todo: Change the following form to an event driven form -->
   <div class="cart-panel" *ngIf="getProducts().length > 0">
     <form [formGroup]="buyerForm" (ngSubmit)="onSubmit()">
       <div class="form-group form-margin">
