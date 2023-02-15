@@ -16,23 +16,23 @@
 
   <!-- Todo: Change the following form to an event driven form -->
   <div class="cart-panel" *ngIf="getProducts().length > 0">
-    <form [formGroup]="buyerForm" (ngSubmit)="onSubmit()">
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
       <div class="form-group form-margin">
         <label for="full-name">Full name</label>
-        <input type="text" formControlName="fullName" class="form-control" id="full-name" placeholder="(minimum 3 characters)">
+        <input type="text" name="full-name" [(ngModel)]="order.fullName" required minlength="3" class="form-control" id="full-name" placeholder="(minimum 3 characters)">
         <!--small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
       </div>
       <div class="form-group form-margin">
         <label for="address">Address</label>
-        <input type="text" formControlName="address" class="form-control" id="address" placeholder="(minimum 6 characters)">
+        <input type="text" name="address" [(ngModel)]="order.address" required minlength="6" class="form-control" id="address" placeholder="(minimum 6 characters)">
         <!--small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
       </div>
       <div class="form-group form-margin">
         <label for="card">Credit card number</label>
-        <input type="text" formControlName="cardNumber" class="form-control" id="card" placeholder="(16-digit-number)">
+        <input type="text" name="card" [(ngModel)]="order.cardNumber" required pattern="\d{16}" class="form-control" id="card" placeholder="(16-digit-number)">
         <!--small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
       </div>
-      <button type="submit" [disabled]="!buyerForm.valid" class="btn btn-primary">Submit</button>
+      <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </div>

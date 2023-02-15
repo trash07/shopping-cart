@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import {OrderedProduct} from "../types/ordered-product";
 import {Product} from "../types/product";
+import {Order} from "../types/order";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   orderedProducts: OrderedProduct[] = []
-  order: {fullName: string, address: string, cardNumber: number} = {
-    fullName: '', address: '', cardNumber: 0
-  }
+  order: Order;
 
-  constructor() { }
+  constructor() {
+    this.order = this.resetOrder()
+  }
 
   addProduct(product: Product, quantity: number): void {
     debugger
@@ -42,5 +43,11 @@ export class CartService {
   getTotalPrice() {
     return this.orderedProducts.map((op: OrderedProduct) => op.product.price * op.quantity)
       .reduce((acc: number, cur: number) => acc + cur)
+  }
+
+  resetOrder(): Order {
+    return {
+      fullName: '', address: '', cardNumber: 0
+    }
   }
 }

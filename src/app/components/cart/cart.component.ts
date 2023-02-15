@@ -4,6 +4,7 @@ import {OrderedProduct} from "../../types/ordered-product";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
+import {Order} from "../../types/order";
 
 @Component({
   selector: 'app-cart',
@@ -11,18 +12,14 @@ import {MessageService} from "primeng/api";
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  buyerForm!: FormGroup
+  order: Order = {
+    fullName: '', address: '', cardNumber: 0
+  }
 
   constructor(private cartService: CartService, private router: Router, private formBuilder: FormBuilder,
               private messageService: MessageService) {}
 
-  ngOnInit(): void {
-    this.buyerForm = this.formBuilder.group({
-      fullName: ['', Validators.required],
-      address: ['', Validators.required],
-      cardNumber: ['', Validators.required]
-    })
-  }
+  ngOnInit(): void {}
 
   getProducts(): OrderedProduct[] {
     return this.cartService.getSelectedProducts()
@@ -33,10 +30,8 @@ export class CartComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.buyerForm.valid) {
-      this.cartService.order = this.buyerForm.value
+      this.cartService.order = this.order;
       this.router.navigate(['/confirmation'])
-    }
   }
 
   handleQuantityChange(newQuantity: string, selectedProduct: OrderedProduct) {
